@@ -79,8 +79,17 @@ flowchart TD
 
 This prototype was validated end-to-end with real telephone calls dialed to mobile devices, proving the full pipeline from autonomous voice discovery to multi-channel proposal delivery.
 
-### 🎙️ 1. Real Call Transcript (Dialogue Log)
-Below is an excerpt of the real outbound phone call conducted by **Priya** (Singh Agency AI) and the client:
+### 🎙️ 1. Real Call Recording & Transcript
+
+> 🎧 **Listen to the live recorded call:**
+>
+> <audio controls src="docs/audio/live-call-recording.wav" style="width: 100%; max-width: 500px;">
+>   <a href="docs/audio/live-call-recording.wav">▶️ Click to listen / download the live call recording (WAV)</a>
+> </audio>
+>
+> *(Direct file link: [docs/audio/live-call-recording.wav](docs/audio/live-call-recording.wav))*
+
+Below is the turn-by-turn dialogue log from this exact call:
 
 | Timestamp | Speaker | Spoken Dialogue |
 | :--- | :--- | :--- |

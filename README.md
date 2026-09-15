@@ -75,6 +75,65 @@ flowchart TD
 
 ---
 
+## 📸 Live Demonstration & End-to-End Proof
+
+This prototype was validated end-to-end with real telephone calls dialed to mobile devices, proving the full pipeline from autonomous voice discovery to multi-channel proposal delivery.
+
+### 🎙️ 1. Real Call Transcript (Dialogue Log)
+Below is an excerpt of the real outbound phone call conducted by **Priya** (Singh Agency AI) and the client:
+
+| Timestamp | Speaker | Spoken Dialogue |
+| :--- | :--- | :--- |
+| `00:04` | **Priya** | *"Hi! How are you doing today?"* |
+| `00:06` | **Client** | *"I am fine."* |
+| `00:13` | **Priya** | *"That is wonderful to hear! So tell me, what kind of products or business do you have?"* |
+| `00:20` | **Client** | *"I have the coaching and commercial business where I am selling clothes and home-related décor products."* |
+| `00:33` | **Priya** | *"That sounds like a fantastic venture! We build custom stores for coaching and products complete with payment gateways, WhatsApp ordering, and admin panels. Our packages start from just 35,000 rupees. So what kind of budget are you thinking for this?"* |
+| `00:51` | **Client** | *"50,000. My budget is 50,000."* |
+| `00:59` | **Priya** | *"That fits our growth plan nicely. Roughly how many products will you list? And do you need COD, inventory tracking, or WhatsApp ordering?"* |
+| `01:10` | **Client** | *"Yep, I will list around 2 to 300 products. I need features like COD, inventory management, and WhatsApp ordering also."* |
+| `01:25` | **Priya** | *"Perfect! I am sending the complete quotation with all project details to your WhatsApp and Email right now. Please check your messages shortly."* |
+| `01:35` | **Client** | *"Okay."* |
+| `01:42` | **Priya** | *"Wonderful! I have noted everything down. Shall I send you the complete project quotation on WhatsApp or Email right now?"* |
+| `01:49` | **Client** | *"Yes, please send it."* |
+| `01:54` | **Priya** | *"Awesome! I just sent it over. Let me know what you think once you take a look."* |
+| `02:06` | **Client** | *"Okay, thank you."* |
+
+---
+
+### 📧 2. Delivered Email Quotation (via Resend API)
+Immediately following client consent, Google Gemini synthesizes the call transcript and dispatches a bespoke, branded HTML quotation directly to the client's inbox:
+
+<p align="center">
+  <img src="docs/screenshots/email-quotation-part1.png" alt="Email Quotation Header & Project Details" width="680" />
+</p>
+
+<p align="center">
+  <img src="docs/screenshots/email-quotation-part2.png" alt="Email Quotation Deliverables & Scope" width="680" />
+</p>
+
+- **Store Type:** Coaching and Commercial Business
+- **Package Investment:** **₹50,000** *(automatically captured from client's stated budget)*
+- **Estimated Delivery:** 3 to 4 weeks
+- **Order Status:** `CONFIRMED`
+- **Tailored Scope & Deliverables:**
+  - Custom E-Commerce Website Design
+  - Instant Payment Gateway Integration (UPI / Cards / NetBanking)
+  - Automated WhatsApp Ordering System
+  - Inventory Management & Tracking (for 200–300 product SKUs)
+  - Easy-to-use Admin Panel Dashboard
+
+---
+
+### 💬 3. WhatsApp Order Confirmation (via Twilio)
+Simultaneously, the agent triggers an instant confirmation to the client's mobile chat with the confirmed order identifier:
+
+<p align="center">
+  <img src="docs/screenshots/whatsapp-confirmation.png" alt="Twilio WhatsApp Order Confirmation" width="380" />
+</p>
+
+---
+
 ## 📂 Project Structure
 
 ```text

@@ -85,11 +85,8 @@ This prototype was validated end-to-end with real telephone calls dialed to mobi
 >
 > 🔗 **[▶️ Stream / Download Full Call Audio (Google Drive)](https://drive.google.com/file/d/1qp2LhgHpWZQZXsfXdgPYLHkUCKZxk7pY/view?usp=drive_link)**
 >
-> <audio controls src="docs/audio/live-call-recording.wav" style="width: 100%; max-width: 500px;">
->   <a href="https://drive.google.com/file/d/1qp2LhgHpWZQZXsfXdgPYLHkUCKZxk7pY/view?usp=drive_link">▶️ Click to listen to the live call recording</a>
-> </audio>
+> 
 >
-> *(Direct repository copy: [docs/audio/live-call-recording.wav](docs/audio/live-call-recording.wav))*
 
 Below is the turn-by-turn dialogue log from this exact call:
 

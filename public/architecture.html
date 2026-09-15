@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>AI Voice Sales Agent - Architecture</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #ffffff;
+    padding: 40px;
+    width: 1100px;
+  }
+  h1 {
+    text-align: center;
+    font-size: 22px;
+    color: #1a1a2e;
+    margin-bottom: 6px;
+    letter-spacing: 1px;
+  }
+  .subtitle {
+    text-align: center;
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 36px;
+  }
+  .flow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+  }
+  .box {
+    border-radius: 10px;
+    padding: 14px 24px;
+    text-align: center;
+    min-width: 340px;
+    max-width: 420px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+  }
+  .box .title {
+    font-size: 15px;
+    font-weight: 700;
+  }
+  .box .desc {
+    font-size: 11px;
+    margin-top: 4px;
+    opacity: 0.85;
+  }
+  .blue    { background: #dbeafe; border: 2px solid #3b82f6; color: #1e3a8a; }
+  .orange  { background: #ffedd5; border: 2px solid #f97316; color: #7c2d12; }
+  .purple  { background: #ede9fe; border: 2px solid #7c3aed; color: #3b0764; }
+  .green   { background: #d1fae5; border: 2px solid #10b981; color: #064e3b; }
+  .red     { background: #fee2e2; border: 2px solid #ef4444; color: #7f1d1d; }
+  .darkblue{ background: #dbeafe; border: 2px solid #1d4ed8; color: #1e3a8a; }
+  .arrow {
+    font-size: 22px;
+    color: #94a3b8;
+    line-height: 1;
+    margin: 6px 0;
+  }
+  .arrow-label {
+    font-size: 10px;
+    color: #64748b;
+    font-style: italic;
+    margin-bottom: 2px;
+  }
+  .tool-row {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin: 0;
+  }
+  .tool-box {
+    background: #d1fae5;
+    border: 2px solid #10b981;
+    border-radius: 8px;
+    padding: 10px 14px;
+    text-align: center;
+    min-width: 110px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  }
+  .tool-box .title { font-size: 12px; font-weight: 700; color: #064e3b; }
+  .tool-box .desc  { font-size: 10px; color: #065f46; margin-top: 3px; }
+
+  .outputs {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    margin-top: 0;
+  }
+  .out-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+  }
+  .legend {
+    display: flex;
+    gap: 24px;
+    justify-content: center;
+    margin-top: 32px;
+    padding: 14px 24px;
+    background: #f8fafc;
+    border-radius: 10px;
+    border: 1px solid #e2e8f0;
+  }
+  .legend-item { font-size: 12px; color: #334155; }
+  .legend-item span { font-weight: 700; }
+  .hot  { color: #dc2626; }
+  .warm { color: #d97706; }
+  .cold { color: #2563eb; }
+  .stack-label {
+    font-size: 11px;
+    color: #64748b;
+    text-align: center;
+    margin-top: 32px;
+    letter-spacing: 0.5px;
+  }
+</style>
+</head>
+<body>
+
+<h1>🤖 AI Voice Sales Agent — Architecture</h1>
+<p class="subtitle">Singh Agency AI Sales Representative Prototype · Built with Node.js · TypeScript · Gemini Live / Fastify · Twilio · PostgreSQL · Redis</p>
+
+<div class="flow">
+
+  <!-- Step 1 -->
+  <div class="box blue">
+    <div class="title">📞 Outbound Phone Call</div>
+    <div class="desc">POST /api/calls/start → Twilio REST API auto-dials target number</div>
+  </div>
+
+  <div class="arrow">↓</div>
+
+  <!-- Step 2 -->
+  <div class="box blue">
+    <div class="title">🔄 Twilio Bidirectional Media Stream</div>
+    <div class="desc">μ-law 8kHz audio over WebSocket · /media-stream endpoint</div>
+  </div>
+
+  <div class="arrow">↓</div>
+
+  <!-- Step 3 -->
+  <div class="box orange">
+    <div class="title">⚡ Audio Transcoder</div>
+    <div class="desc">Twilio μ-law 8kHz ↔ PCM 16kHz · Low-latency streaming · No buffering</div>
+  </div>
+
+  <div class="arrow">↓</div>
+
+  <!-- Step 4 -->
+  <div class="box purple">
+    <div class="title">🧠 Gemini Live API</div>
+    <div class="desc">gemini-3.1-flash-live-preview · Real-time bidirectional voice AI<br>
+    Telugu / Hindi / English · Code-switching · Interruption handling</div>
+  </div>
+
+  <div class="arrow-label">Tool Calls (function calling)</div>
+  <div class="arrow">↓</div>
+
+  <!-- Tools Row -->
+  <div class="tool-row">
+    <div class="tool-box">
+      <div class="title">update_lead</div>
+      <div class="desc">Saves budget, products, timeline, features</div>
+    </div>
+    <div class="tool-box">
+      <div class="title">classify_lead</div>
+      <div class="desc">HOT / WARM / COLD scoring</div>
+    </div>
+    <div class="tool-box">
+      <div class="title">send_whatsapp</div>
+      <div class="desc">Fires mid-call on HOT intent</div>
+    </div>
+    <div class="tool-box">
+      <div class="title">schedule_callback</div>
+      <div class="desc">NLP time parsing + BullMQ job</div>
+    </div>
+  </div>
+
+  <div class="arrow">↓</div>
+
+  <!-- Outputs Row -->
+  <div class="outputs">
+    <div class="out-col">
+      <div class="box green" style="min-width:220px">
+        <div class="title">📱 Twilio WhatsApp</div>
+        <div class="desc">Mid-call message · Resume · Architecture image · Your number</div>
+      </div>
+    </div>
+    <div class="out-col">
+      <div class="box red" style="min-width:200px">
+        <div class="title">⏰ BullMQ + Redis</div>
+        <div class="desc">Callback scheduled · "Tomorrow morning" → exact IST timestamp</div>
+      </div>
+    </div>
+    <div class="out-col">
+      <div class="box darkblue" style="min-width:200px">
+        <div class="title">🗄️ PostgreSQL (Supabase)</div>
+        <div class="desc">Leads · Calls · Transcripts · Actions · Callbacks</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Legend -->
+<div class="legend">
+  <div class="legend-item"><span class="hot">🔴 HOT</span> — High intent → WhatsApp fires <em>during</em> the call</div>
+  <div class="legend-item"><span class="warm">🟡 WARM</span> — Interested → Callback scheduled from spoken time</div>
+  <div class="legend-item"><span class="cold">🔵 COLD</span> — Just looking → Logged, follow-up sent after call</div>
+</div>
+
+<p class="stack-label">Stack: Node.js · TypeScript · Fastify · WebSocket · Prisma · Gemini Live API · Twilio Voice · Twilio WhatsApp · BullMQ · Redis · PostgreSQL</p>
+
+</body>
+</html>

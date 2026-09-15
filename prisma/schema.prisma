@@ -1,0 +1,92 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Lead {
+  id                String    @id @default(uuid())
+  phone             String    @unique
+  language          String?
+  productType       String?
+  productCount      Int?
+  budget            String?
+  currency          String?
+  timeline          String?
+  requestedFeatures String?
+  decisionMaker     String?
+  buyingSignals     String?
+  blockers          String?
+  intent            String?
+  intentScore       Int?
+  intentReason      String?
+  callbackAt        DateTime?
+  status            String?
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+
+  calls             Call[]
+  callbacks         Callback[]
+}
+
+model Call {
+  id                  String    @id @default(uuid())
+  leadId              String
+  twilioCallSid       String    @unique
+  streamSid           String?
+  startedAt           DateTime  @default(now())
+  endedAt             DateTime?
+  duration            Int?
+  finalClassification String?
+  finalSummary        String?
+  createdAt           DateTime  @default(now())
+
+  lead                Lead      @relation(fields: [leadId], references: [id])
+  messages            ConversationMessage[]
+  actions             Action[]
+  callbacks           Callback[]
+}
+
+model ConversationMessage {
+  id        String   @id @default(uuid())
+  callId    String
+  role      String
+  text      String
+  language  String?
+  timestamp DateTime @default(now())
+
+  call      Call     @relation(fields: [callId], references: [id])
+}
+
+model Action {
+  id        String   @id @default(uuid())
+  callId    String
+  type      String
+  status    String
+  payload   Json?
+  result    Json?
+  createdAt DateTime @default(now())
+
+  call      Call     @relation(fields: [callId], references: [id])
+}
+
+model Callback {
+  id              String   @id @default(uuid())
+  leadId          String
+  callId          String
+  requestedPhrase String?
+  scheduledAt     DateTime
+  timezone        String
+  status          String
+  twilioCallSid   String?
+  createdAt       DateTime @default(now())
+
+  lead            Lead     @relation(fields: [leadId], references: [id])
+  call            Call     @relation(fields: [callId], references: [id])
+
+  @@index([scheduledAt])
+  @@index([status])
+}
